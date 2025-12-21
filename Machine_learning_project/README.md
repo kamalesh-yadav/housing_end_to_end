@@ -26,3 +26,7 @@ docker build -t <image_name>:<tagname> .
 python setup.py install
 
 ```
+Install ipynbkernel
+```
+pip install ipykernel
+```
