@@ -89,16 +89,19 @@ class DataIngestion:
 
             if strat_train_set is not None:
                 os.makedirs(self.data_ingestion_config.ingested_train_dir,exist_ok=True)
+                logging.info(f"Exporting Training Dataset to file:{train_file_path}")
                 strat_train_set.to_csv(train_file_path,index = False)
 
             if strat_test_set is not None:
                 os.makedirs(self.data_ingestion_config.ingested_test_dir,exist_ok=True)
+                logging.info(f"Exporting test dataset to file:{test_file_path} ")
                 strat_test_set.to_csv(train_file_path,index = False)
             
-            DataIngestionArtifact(train_file_path=train_file_path,
+            data_ingestion_artifact = DataIngestionArtifact(train_file_path=train_file_path,
                                   test_file_path=test_file_path,
                                   is_ingested=True,
                                   message="Data Ingestion completed successfully")
+            logging.info(f"Data Ingestion Artifact:[{data_ingestion_artifact}]")
             return DataIngestionArtifact
         except Exception as e:
             raise HousingException(e,sys) from e
@@ -111,6 +114,8 @@ class DataIngestion:
             return self.split_train_as_test()
         except Exception as e:
             raise HousingException(e,sys) from e
+    def __del__(self):
+        logging.info(f"{'='*20} data Ingestion log completed.{'='*20}\n\n")
         
 
 # 1:17:23
