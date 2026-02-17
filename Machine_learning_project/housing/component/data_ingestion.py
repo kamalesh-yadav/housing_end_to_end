@@ -102,7 +102,7 @@ class DataIngestion:
                                   is_ingested=True,
                                   message="Data Ingestion completed successfully")
             logging.info(f"Data Ingestion Artifact:[{data_ingestion_artifact}]")
-            return DataIngestionArtifact
+            return data_ingestion_artifact
         except Exception as e:
             raise HousingException(e,sys) from e
     
